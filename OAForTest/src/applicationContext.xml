@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd
+      http://www.springframework.org/schema/tx 
+      http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    
+	">
+	<!-- 打开注解方式，交给注解去做 -->
+	<context:annotation-config/>
+	<context:component-scan base-package="com.dao.impl"></context:component-scan>
+	<context:component-scan base-package="com.action"></context:component-scan>
+	<context:component-scan base-package="com.service.impl"></context:component-scan>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+	<!-- 配置hibernate事务管理器 -->
+	<bean id="myTx" class= "org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置事务管理策略 -->
+	<tx:advice id="myAdvice" transaction-manager="myTx">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="get*" propagation="NOT_SUPPORTED"/>
+			<tx:method name="query*" propagation="NOT_SUPPORTED"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- 设置切面 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.service.impl.*.*(..))" id="myPointcut"/>
+		<aop:advisor advice-ref="myAdvice" pointcut-ref="myPointcut"/>
+	</aop:config>
+	<!-- hibernateTemplate工具 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+</beans>

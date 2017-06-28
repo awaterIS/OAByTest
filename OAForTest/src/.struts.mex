@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="logPackage" location="15,1473" size="280,140">
+    <action name="userLoginAction_*" location="66,58" size="150,41">
+      <result name="main">
+        <resourceEdge source="main" routing="0" target="main.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="myPackage" location="750,108" size="875,1155">
+    <action name="forwordAction" location="661,72" size="150,83">
+      <result name="top">
+        <resourceEdge source="top" routing="0" target="top.jsp" />
+      </result>
+      <result name="left">
+        <resourceEdge source="left" routing="0" target="left.jsp" />
+      </result>
+      <result name="right">
+        <resourceEdge source="right" routing="0" target="right.jsp" />
+      </result>
+    </action>
+    <action name="userAction_*" location="661,1007" size="150,104">
+      <result name="userByRole">
+        <resourceEdge source="userByRole" routing="0" target="userByRoleList.jsp" />
+      </result>
+      <result name="updateRequest">
+        <resourceEdge source="updateRequest" routing="0" target="userEdit.jsp" />
+      </result>
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="userList.jsp" />
+      </result>
+      <result name="delete">
+        <resourceEdge source="delete" routing="0" target="userList.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="main.jsp" path="/WEB-INF/main/main.jsp" location="80,1655" size="150,55" />
+  <webResource name="top.jsp" path="/WEB-INF/main/top.jsp" location="1690,185" size="150,55" />
+  <webResource name="left.jsp" path="/WEB-INF/main/left.jsp" location="1410,10" size="150,55" />
+  <webResource name="right.jsp" path="/WEB-INF/main/right.jsp" location="535,185" size="150,55" />
+  <webResource name="userByRoleList.jsp" path="/WEB-INF/user/userByRoleList.jsp" location="1410,1305" size="150,55" />
+  <webResource name="userEdit.jsp" path="/WEB-INF/user/userEdit.jsp" location="1690,1130" size="150,55" />
+  <webResource name="userList.jsp" path="/WEB-INF/user/userList.jsp" location="1690,1025" size="150,55" />
+  <webResource name="menuEdit.jsp" path="/WEB-INF/menu/menuEdit.jsp" location="10,255" size="150,55" />
+  <webResource name="menuList.jsp" path="/WEB-INF/menu/menuList.jsp" location="255,325" size="150,55" />
+</Struts2Diagram>
+
